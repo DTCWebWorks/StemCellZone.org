@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="dark" name="color-scheme"/>
+<meta content="#050913" name="theme-color"/>
+<title>Signal Phase | StemCellZone</title>
+<meta content="The signal phase completes the system by explaining how direction and targeting fit into a release-and-movement model." name="description"/>
+<style>
+:root {
+  --bg: #050913;
+  --bg-2: #081223;
+  --surface: rgba(10, 20, 40, 0.94);
+  --surface-soft: rgba(13, 28, 54, 0.96);
+  --surface-softer: rgba(7, 16, 32, 0.98);
+  --text: #e7f0ff;
+  --muted: #9ab0cf;
+  --line: rgba(120, 170, 255, 0.58);
+  --card-outline: rgba(180, 220, 255, 0.16);
+  --primary: #2d7cff;
+  --primary-2: #58b7ff;
+  --accent: #84d6ff;
+  --glow: rgba(77, 170, 255, 0.28);
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.42);
+  --max: 1200px;
+  --radius: 24px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+img { border: 0; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top right, rgba(88, 183, 255, 0.12), transparent 30%),
+    radial-gradient(circle at left center, rgba(45, 124, 255, 0.08), transparent 34%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  color: var(--text);
+  line-height: 1.6;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+.container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+
+.topline {
+  background: linear-gradient(135deg, rgba(88,183,255,0.08), rgba(45,124,255,0.12));
+  border-bottom: 1px solid var(--line);
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 14px;
+}
+.topline .container {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px 0;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+  background: rgba(5, 9, 19, 0.94);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner {
+  min-height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 12px 0;
+}
+.brand-logo { width: 290px; height: auto; }
+.nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.nav a {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.nav a:hover { color: var(--accent); }
+
+.btn-primary,
+.btn-secondary,
+.header-cta,
+.card-link,
+.pill-link,
+.article-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-weight: 800;
+  text-align: center;
+}
+.btn-primary,
+.header-cta,
+.card-link,
+.article-link {
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary-2), var(--primary));
+  box-shadow: 0 0 0 1px var(--card-outline), var(--shadow);
+}
+.btn-secondary,
+.pill-link {
+  border: 1px solid var(--line);
+  color: var(--accent);
+  background: var(--surface);
+}
+
+.hero { padding: 54px 0 24px; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 30px;
+  align-items: center;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  margin: 0 0 16px;
+  font-size: clamp(34px, 5vw, 60px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+.hero p {
+  margin: 0 0 18px;
+  font-size: clamp(18px, 2.2vw, 22px);
+  color: var(--muted);
+  max-width: 760px;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0; }
+.hero-note, .small, .disclosure { font-size: 14px; color: #7f97bc; }
+
+.hero-card,
+.section-card,
+.mini-card,
+.product-card,
+.article-card,
+.trust-inner,
+.faq-item,
+.final-cta-card,
+.table-wrap,
+.tier-card,
+.subtier-grid,
+.deep-grid,
+.expand-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 1px var(--card-outline), var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.hero-card::before,
+.section-card::before,
+.mini-card::before,
+.product-card::before,
+.article-card::before,
+.trust-inner::before,
+.faq-item::before,
+.final-cta-card::before,
+.table-wrap::before,
+.tier-card::before,
+.subtier-grid::before,
+.deep-grid::before,
+.expand-panel::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(132,214,255,0.18) 0%, rgba(132,214,255,0.95) 44%, rgba(45,124,255,0.74) 100%);
+  box-shadow: 0 0 10px rgba(104, 190, 255, 0.35);
+  border-radius: 999px;
+  pointer-events: none;
+}
+.hero-card::after,
+.section-card::after,
+.mini-card::after,
+.product-card::after,
+.article-card::after,
+.trust-inner::after,
+.faq-item::after,
+.final-cta-card::after,
+.table-wrap::after,
+.tier-card::after,
+.subtier-grid::after,
+.deep-grid::after,
+.expand-panel::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(132,214,255,0.95) 0%, rgba(45,124,255,0.78) 58%, rgba(132,214,255,0.12) 100%);
+  box-shadow: 0 0 10px rgba(104, 190, 255, 0.35);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.hero-card { padding: 26px; }
+.hero-logo-wrap {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+.hero-logo {
+  width: min(100%, 620px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 28px rgba(73, 153, 255, 0.18));
+}
+.hero-mini-points,
+.trust-grid,
+.guide-grid,
+.article-grid,
+.faq-grid,
+.footer-grid,
+.system-grid,
+.product-grid,
+.start-grid {
+  display: grid;
+  gap: 18px;
+}
+.hero-mini-points { grid-template-columns: 1fr; margin-top: 12px; }
+.trust-grid { grid-template-columns: repeat(3, 1fr); }
+.start-grid,
+.guide-grid { grid-template-columns: repeat(4, 1fr); }
+.system-grid, .product-grid { grid-template-columns: repeat(3, 1fr); }
+.article-grid { grid-template-columns: repeat(3, 1fr); }
+.faq-grid { grid-template-columns: repeat(2, 1fr); }
+.footer-grid { grid-template-columns: 1.15fr 0.85fr; }
+
+.mini-point,
+.trust-item,
+.mini-card,
+.product-card,
+.article-card,
+.faq-item {
+  padding: 20px;
+}
+.mini-point,
+.trust-item {
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(10,20,40,0.9), rgba(7,16,32,0.92));
+  border: 1px solid var(--line);
+  color: var(--accent);
+  font-weight: 800;
+  text-align: center;
+}
+.mini-point { color: var(--muted); font-size: 15px; }
+
+.section, .trust-strip, .articles, .final-cta { padding: 22px 0; }
+.trust-inner, .section-card { padding: 30px; }
+h2 {
+  margin: 0 0 14px;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.1;
+}
+.lead {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 18px;
+  max-width: 920px;
+}
+.mini-card h3,
+.product-card h3,
+.article-card h3,
+.faq-item h3,
+.tier-card h3,
+.subtier-card h3,
+.deep-card h3 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+.mini-card p,
+.product-card p,
+.article-card p,
+.faq-item p,
+.footer-brand p,
+.footer-links p,
+.tier-card p,
+.subtier-card p,
+.deep-card p { margin: 0; color: var(--muted); }
+
+.product-card,
+.article-card,
+.mini-card,
+.tier-card,
+.subtier-card,
+.deep-card {
+  background: linear-gradient(180deg, rgba(10,20,40,0.96) 0%, rgba(7,16,32,0.98) 100%);
+}
+.product-card,
+.article-card { display: flex; flex-direction: column; gap: 12px; }
+.product-tag,
+.article-kicker,
+.tier-label {
+  display: inline-block;
+  width: fit-content;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--surface-soft);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.price-row { font-size: 22px; font-weight: 800; color: var(--accent); }
+.rating-row { font-size: 15px; color: var(--muted); font-weight: 700; }
+.feature-list { margin: 0; padding-left: 18px; color: var(--muted); }
+.feature-list li { margin-bottom: 8px; }
+.article-link, .card-link { width: fit-content; margin-top: auto; }
+
+.table-wrap { overflow-x: auto; padding: 10px; margin-top: 22px; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 820px;
+  background: var(--surface-softer);
+  border-radius: 16px;
+  overflow: hidden;
+}
+th, td {
+  padding: 16px 14px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  font-size: 15px;
+}
+th {
+  background: var(--surface-soft);
+  color: var(--accent);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+tr:last-child td { border-bottom: none; }
+
+.pyramid-wrap { display: grid; gap: 18px; }
+.tier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.tier-card, .subtier-card, .deep-card {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+.tier-card:hover, .subtier-card:hover, .deep-card:hover,
+.tier-card.active, .subtier-card.active {
+  transform: translateY(-2px);
+  border-color: rgba(132,214,255,0.42);
+  background: linear-gradient(180deg, rgba(14,28,54,0.98) 0%, rgba(8,18,35,1) 100%);
+}
+.expand-panel {
+  display: none;
+  padding: 22px;
+}
+.expand-panel.active { display: block; }
+.subtier-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; padding: 22px; }
+.deep-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding: 22px; }
+.deep-card { cursor: default; }
+.deep-card a { display: inline-flex; margin-top: 12px; }
+.panel-title { margin: 0 0 8px; font-size: 26px; }
+.panel-copy { margin: 0; color: var(--muted); }
+
+.final-cta-card {
+  padding: 40px 24px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(88,183,255,0.07), rgba(45,124,255,0.12));
+}
+.final-cta p {
+  max-width: 760px;
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 18px;
+}
+footer {
+  border-top: 1px solid var(--line);
+  background: rgba(10,20,40,0.86);
+  padding: 28px 0 36px;
+  margin-top: 20px;
+}
+.footer-brand img { width: 240px; margin-bottom: 14px; }
+.footer-links a {
+  display: inline-block;
+  margin-right: 16px;
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.notice-list { margin: 16px 0 0; padding-left: 20px; color: var(--muted); }
+.notice-list li { margin-bottom: 8px; }
+
+@media (max-width: 1100px) {
+  .hero-grid,
+  .trust-grid,
+  .start-grid,
+  .system-grid,
+  .product-grid,
+  .article-grid,
+  .faq-grid,
+  .footer-grid,
+  .tier-grid,
+  .subtier-grid,
+  .deep-grid,
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
+  .nav { display: none; }
+  .hero-logo-wrap { min-height: 220px; }
+}
+
+@media (max-width: 640px) {
+  .brand-logo { width: 220px; }
+  .hero { padding-top: 30px; }
+  .header-cta, .btn-primary, .btn-secondary { min-height: 42px; padding: 0 14px; font-size: 14px; }
+  .section-card, .hero-card, .mini-card, .product-card, .article-card, .faq-item, .final-cta-card, .tier-card, .subtier-card, .deep-card, .expand-panel { padding: 20px; }
+  .hero h1 { font-size: 34px; }
+  .hero p, .lead, .final-cta p { font-size: 17px; }
+}
+
+
+button,
+.btn-primary,
+.btn-secondary,
+.header-cta,
+.card-link,
+.pill-link,
+.article-link {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+@supports (-webkit-touch-callout: none) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
+</style>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://stemcellzone.net/signal-phase.html" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Signal Phase", "description": "The signal phase completes the system by explaining how direction and targeting fit into a release-and-movement model.", "author": {"@type": "Organization", "name": "StemCellZone"}, "publisher": {"@type": "Organization", "name": "StemCellZone"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://stemcellzone.net/signal-phase.html"}, "about": ["What Supporting Stem Cells Means", "stem cell support", "stem cell education"]}</script></head>
+<body>
+<div class="topline"><div class="container">Educational article placeholder • StemCellZone knowledge library</div></div>
+<header class="site-header">
+<div class="container header-inner">
+<a aria-label="StemCellZone home" href="index.html"><img alt="StemCellZone logo" class="brand-logo" src="images/stemcellzone-logo.png"/></a>
+<nav aria-label="Main navigation" class="nav">
+<a href="index.html#system">The System</a>
+<a href="index.html#products">Products</a>
+<a href="articles.html">Articles</a>
+<a href="index.html#faq">FAQ</a>
+</nav>
+<a class="header-cta" href="index.html#recommendation">View Best Option</a>
+</div>
+</header>
+<main>
+<section class="hero">
+<div class="container hero-grid">
+<div class="hero-card glass-card">
+<span class="eyebrow">Tier 3 article page</span>
+<h1>Signal Phase</h1>
+<p class="lead">The signal phase completes the system by explaining how direction and targeting fit into a release-and-movement model.</p>
+<div class="hero-cta-row">
+<a class="btn-primary" href="articles.html">Back to Article Pyramid</a>
+<a class="btn-secondary" href="index.html#products">View Products</a>
+</div>
+<div class="hero-mini-points">
+<div class="mini-point">Parent topic: What Supporting Stem Cells Means</div>
+</div>
+</div>
+<div class="hero-card glass-card hero-logo-wrap">
+<img alt="StemCellZone logo" class="hero-logo" src="images/stemcellzone-logo.png"/>
+</div>
+</div>
+</section>
+<section class="trust-strip">
+<div class="container">
+<div class="trust-inner glass-card">
+<div class="trust-grid">
+<div class="trust-item">People-first educational content</div>
+<div class="trust-item">No medical claims or guaranteed outcomes</div>
+<div class="trust-item">Built to connect the pyramid and product logic</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="container">
+<div class="section-card glass-card">
+<span class="article-kicker">Quick Overview</span>
+<h2>What this article covers</h2>
+<p class="lead">The signal phase completes the system by explaining how direction and targeting fit into a release-and-movement model.</p>
+<ul class="feature-list"><li>Signaling adds direction to the model.</li><li>The third step completes the release-mobilize-signal sequence.</li><li>Clear explanation builds trust.</li><li>Signal product placement should feel like a natural extension of the lesson.</li></ul>
+</div>
+</div>
+</section>
+<section class="section"><div class="container"><div class="section-card"><h2>Why the final step matters</h2><p class="lead">Without a signal phase, the system stops short. Readers might understand availability and movement, but they still need a clear explanation of direction. That is where signaling comes in.</p></div></div></section><section class="section"><div class="container"><div class="section-card"><h2>What signaling adds to the model</h2><p class="lead">Signaling makes the three-step system feel complete. It shows that support language is not just about having more cells or moving cells around. It is also about the biological cues that shape where activity is needed and how responses are organized.</p></div></div></section><section class="section"><div class="container"><div class="section-card"><h2>Why this increases trust</h2><p class="lead">A site that explains the third step clearly feels more thoughtful than one that simply stacks products. Readers can see the internal logic. Even if they are cautious, they understand the educational framework better.</p></div></div></section><section class="section"><div class="container"><div class="section-card"><h2>How product placement should feel</h2><p class="lead">Later, a Signal product button or affiliate link can fit naturally here. The lesson should still come first, so the article feels useful on its own.</p></div></div></section>
+<section class="section">
+<div class="container">
+<div class="section-card glass-card">
+<span class="article-kicker">System Connection</span>
+<h2>Signal product fit</h2>
+<p class="lead">This topic naturally supports a Signal-style product later because it centers on targeting, cues, and direction within the system.</p>
+<p>Because StemCellZone is built as a layered learning site, this article is meant to do two jobs at once: teach the reader something useful and make the next click feel logical. That is stronger than dropping an affiliate button into a page with no educational setup.</p>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="container">
+<div class="section-card glass-card">
+<span class="article-kicker">FAQ</span>
+<h2>Common Question</h2>
+<div class="faq-grid">
+<article class="faq-item glass-card">
+<h3>Is signaling only about stem cells?</h3>
+<p>No. Signaling is a broad biological concept, but here it is being used to help readers understand the final piece of a support-system framework.</p>
+</article>
+<article class="faq-item glass-card">
+<h3>Is this page intended as medical advice?</h3>
+<p>No. StemCellZone is an educational affiliate website. The goal is to explain concepts clearly, help readers think more critically, and guide them through the site structure without making treatment claims.</p>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="container">
+<div class="section-card glass-card">
+<span class="article-kicker">Continue Learning</span>
+<h2>Related next reads</h2>
+<p class="lead">The pyramid works best when each article leads naturally into the next concept. Use these links to keep moving through the system.</p>
+<div class="hero-cta-row"><a class="pill-link" href="mobilize-phase.html">Mobilize Phase</a><a class="pill-link" href="synergy-between-steps.html">Synergy Between Steps</a></div>
+</div>
+</div>
+</section>
+<section class="final-cta">
+<div class="container">
+<div class="final-cta-card glass-card">
+<h2>Keep building your stem cell support understanding</h2>
+<p>This page is part of the deeper learning tier of StemCellZone. The goal is to make the site useful enough that product pages feel like an informed next step, not a hard sell.</p>
+<div class="hero-cta-row">
+<a class="btn-primary" href="articles.html">Back to Article Pyramid</a>
+<a class="btn-secondary" href="index.html#recommendation">See the Full System Area</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-grid">
+<div>
+<img alt="StemCellZone logo" class="footer-logo" src="images/stemcellzone-logo.png"/>
+<p class="small">Educational content only. Not medical advice. No guarantees.</p>
+</div>
+<div>
+<h3>Explore</h3>
+<a href="index.html">Home</a><br/>
+<a href="articles.html">Articles</a><br/>
+<a href="sitemap.html">Sitemap</a>
+</div>
+<div>
+<h3>Policies</h3>
+<a href="affiliate-disclosure.html">Affiliate Disclosure</a><br/>
+<a href="privacy-policy.html">Privacy Policy</a><br/>
+<a href="terms.html">Terms</a>
+</div>
+</div>
+</footer>
+</body>
+</html>

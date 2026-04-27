@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="dark" name="color-scheme"/>
+<meta content="#050913" name="theme-color"/>
+<title>StemCellZone | Stem Cell Support, Explained Simply</title>
+<meta content="StemCellZone explains stem cell support simply, including release, mobilize, and signal system logic, educational articles, and product pathways." name="description"/>
+<style>
+:root {
+  --bg: #050913;
+  --bg-2: #081223;
+  --surface: rgba(10, 20, 40, 0.94);
+  --surface-soft: rgba(13, 28, 54, 0.96);
+  --surface-softer: rgba(7, 16, 32, 0.98);
+  --text: #e7f0ff;
+  --muted: #9ab0cf;
+  --line: rgba(120, 170, 255, 0.58);
+  --card-outline: rgba(180, 220, 255, 0.16);
+  --primary: #2d7cff;
+  --primary-2: #58b7ff;
+  --accent: #84d6ff;
+  --glow: rgba(77, 170, 255, 0.28);
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.42);
+  --max: 1200px;
+  --radius: 24px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+img { border: 0; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top right, rgba(88, 183, 255, 0.12), transparent 30%),
+    radial-gradient(circle at left center, rgba(45, 124, 255, 0.08), transparent 34%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  color: var(--text);
+  line-height: 1.6;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+.container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+
+.topline {
+  background: linear-gradient(135deg, rgba(88,183,255,0.08), rgba(45,124,255,0.12));
+  border-bottom: 1px solid var(--line);
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 14px;
+}
+.topline .container {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px 0;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+  background: rgba(5, 9, 19, 0.94);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner {
+  min-height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 12px 0;
+}
+.brand-logo { width: 290px; height: auto; }
+.nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.nav a {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.nav a:hover { color: var(--accent); }
+
+.btn-primary,
+.btn-secondary,
+.header-cta,
+.card-link,
+.pill-link,
+.article-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-weight: 800;
+  text-align: center;
+}
+.btn-primary,
+.header-cta,
+.card-link,
+.article-link {
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary-2), var(--primary));
+  box-shadow: 0 0 0 1px var(--card-outline), var(--shadow);
+}
+.btn-secondary,
+.pill-link {
+  border: 1px solid var(--line);
+  color: var(--accent);
+  background: var(--surface);
+}
+
+.hero { padding: 54px 0 24px; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 30px;
+  align-items: center;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  margin: 0 0 16px;
+  font-size: clamp(34px, 5vw, 60px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+.hero p {
+  margin: 0 0 18px;
+  font-size: clamp(18px, 2.2vw, 22px);
+  color: var(--muted);
+  max-width: 760px;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0; }
+.hero-note, .small, .disclosure { font-size: 14px; color: #7f97bc; }
+
+.hero-card,
+.section-card,
+.mini-card,
+.product-card,
+.article-card,
+.trust-inner,
+.faq-item,
+.final-cta-card,
+.table-wrap,
+.tier-card,
+.subtier-grid,
+.deep-grid,
+.expand-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 1px var(--card-outline), var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.hero-card::before,
+.section-card::before,
+.mini-card::before,
+.product-card::before,
+.article-card::before,
+.trust-inner::before,
+.faq-item::before,
+.final-cta-card::before,
+.table-wrap::before,
+.tier-card::before,
+.subtier-grid::before,
+.deep-grid::before,
+.expand-panel::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(132,214,255,0.18) 0%, rgba(132,214,255,0.95) 44%, rgba(45,124,255,0.74) 100%);
+  box-shadow: 0 0 10px rgba(104, 190, 255, 0.35);
+  border-radius: 999px;
+  pointer-events: none;
+}
+.hero-card::after,
+.section-card::after,
+.mini-card::after,
+.product-card::after,
+.article-card::after,
+.trust-inner::after,
+.faq-item::after,
+.final-cta-card::after,
+.table-wrap::after,
+.tier-card::after,
+.subtier-grid::after,
+.deep-grid::after,
+.expand-panel::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(132,214,255,0.95) 0%, rgba(45,124,255,0.78) 58%, rgba(132,214,255,0.12) 100%);
+  box-shadow: 0 0 10px rgba(104, 190, 255, 0.35);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.hero-card { padding: 26px; }
+.hero-logo-wrap {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+.hero-logo {
+  width: min(100%, 620px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 28px rgba(73, 153, 255, 0.18));
+}
+.hero-mini-points,
+.trust-grid,
+.guide-grid,
+.article-grid,
+.faq-grid,
+.footer-grid,
+.system-grid,
+.product-grid,
+.start-grid {
+  display: grid;
+  gap: 18px;
+}
+.hero-mini-points { grid-template-columns: 1fr; margin-top: 12px; }
+.trust-grid { grid-template-columns: repeat(3, 1fr); }
+.start-grid,
+.guide-grid { grid-template-columns: repeat(4, 1fr); }
+.system-grid, .product-grid { grid-template-columns: repeat(3, 1fr); }
+.article-grid { grid-template-columns: repeat(3, 1fr); }
+.faq-grid { grid-template-columns: repeat(2, 1fr); }
+.footer-grid { grid-template-columns: 1.15fr 0.85fr; }
+
+.mini-point,
+.trust-item,
+.mini-card,
+.product-card,
+.article-card,
+.faq-item {
+  padding: 20px;
+}
+.mini-point,
+.trust-item {
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(10,20,40,0.9), rgba(7,16,32,0.92));
+  border: 1px solid var(--line);
+  color: var(--accent);
+  font-weight: 800;
+  text-align: center;
+}
+.mini-point { color: var(--muted); font-size: 15px; }
+
+.section, .trust-strip, .articles, .final-cta { padding: 22px 0; }
+.trust-inner, .section-card { padding: 30px; }
+h2 {
+  margin: 0 0 14px;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.1;
+}
+.lead {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 18px;
+  max-width: 920px;
+}
+.mini-card h3,
+.product-card h3,
+.article-card h3,
+.faq-item h3,
+.tier-card h3,
+.subtier-card h3,
+.deep-card h3 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+.mini-card p,
+.product-card p,
+.article-card p,
+.faq-item p,
+.footer-brand p,
+.footer-links p,
+.tier-card p,
+.subtier-card p,
+.deep-card p { margin: 0; color: var(--muted); }
+
+.product-card,
+.article-card,
+.mini-card,
+.tier-card,
+.subtier-card,
+.deep-card {
+  background: linear-gradient(180deg, rgba(10,20,40,0.96) 0%, rgba(7,16,32,0.98) 100%);
+}
+.product-card,
+.article-card { display: flex; flex-direction: column; gap: 12px; }
+.product-tag,
+.article-kicker,
+.tier-label {
+  display: inline-block;
+  width: fit-content;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--surface-soft);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.price-row { font-size: 22px; font-weight: 800; color: var(--accent); }
+.rating-row { font-size: 15px; color: var(--muted); font-weight: 700; }
+.feature-list { margin: 0; padding-left: 18px; color: var(--muted); }
+.feature-list li { margin-bottom: 8px; }
+.article-link, .card-link { width: fit-content; margin-top: auto; }
+
+.table-wrap { overflow-x: auto; padding: 10px; margin-top: 22px; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 820px;
+  background: var(--surface-softer);
+  border-radius: 16px;
+  overflow: hidden;
+}
+th, td {
+  padding: 16px 14px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  font-size: 15px;
+}
+th {
+  background: var(--surface-soft);
+  color: var(--accent);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+tr:last-child td { border-bottom: none; }
+
+.pyramid-wrap { display: grid; gap: 18px; }
+.tier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.tier-card, .subtier-card, .deep-card {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+.tier-card:hover, .subtier-card:hover, .deep-card:hover,
+.tier-card.active, .subtier-card.active {
+  transform: translateY(-2px);
+  border-color: rgba(132,214,255,0.42);
+  background: linear-gradient(180deg, rgba(14,28,54,0.98) 0%, rgba(8,18,35,1) 100%);
+}
+.expand-panel {
+  display: none;
+  padding: 22px;
+}
+.expand-panel.active { display: block; }
+.subtier-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; padding: 22px; }
+.deep-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding: 22px; }
+.deep-card { cursor: default; }
+.deep-card a { display: inline-flex; margin-top: 12px; }
+.panel-title { margin: 0 0 8px; font-size: 26px; }
+.panel-copy { margin: 0; color: var(--muted); }
+
+.final-cta-card {
+  padding: 40px 24px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(88,183,255,0.07), rgba(45,124,255,0.12));
+}
+.final-cta p {
+  max-width: 760px;
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 18px;
+}
+footer {
+  border-top: 1px solid var(--line);
+  background: rgba(10,20,40,0.86);
+  padding: 28px 0 36px;
+  margin-top: 20px;
+}
+.footer-brand img { width: 240px; margin-bottom: 14px; }
+.footer-links a {
+  display: inline-block;
+  margin-right: 16px;
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.notice-list { margin: 16px 0 0; padding-left: 20px; color: var(--muted); }
+.notice-list li { margin-bottom: 8px; }
+
+@media (max-width: 1100px) {
+  .hero-grid,
+  .trust-grid,
+  .start-grid,
+  .system-grid,
+  .product-grid,
+  .article-grid,
+  .faq-grid,
+  .footer-grid,
+  .tier-grid,
+  .subtier-grid,
+  .deep-grid,
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
+  .nav { display: none; }
+  .hero-logo-wrap { min-height: 220px; }
+}
+
+@media (max-width: 640px) {
+  .brand-logo { width: 220px; }
+  .hero { padding-top: 30px; }
+  .header-cta, .btn-primary, .btn-secondary { min-height: 42px; padding: 0 14px; font-size: 14px; }
+  .section-card, .hero-card, .mini-card, .product-card, .article-card, .faq-item, .final-cta-card, .tier-card, .subtier-card, .deep-card, .expand-panel { padding: 20px; }
+  .hero h1 { font-size: 34px; }
+  .hero p, .lead, .final-cta p { font-size: 17px; }
+}
+
+
+button,
+.btn-primary,
+.btn-secondary,
+.header-cta,
+.card-link,
+.pill-link,
+.article-link {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+@supports (-webkit-touch-callout: none) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
+</style>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://stemcellzone.net/" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "StemCellZone", "url": "https://stemcellzone.net/", "description": "Educational affiliate website about stem cell support systems and guided learning."}</script></head>
+<body>
+<div class="topline">
+<div class="container">Educational content • Affiliate-supported • No medical claims • Built to teach before it sells</div>
+</div>
+<header class="site-header">
+<div class="container header-inner">
+<a aria-label="StemCellZone home" href="index.html">
+<img alt="StemCellZone logo" class="brand-logo" src="images/stemcellzone-logo.png"/>
+</a>
+<nav aria-label="Main navigation" class="nav">
+<a href="#system">The System</a>
+<a href="#products">Products</a>
+<a href="articles.html">Articles</a>
+<a href="#faq">FAQ</a>
+</nav>
+<a class="header-cta" href="#recommendation">View Best Option</a>
+</div>
+</header>
+<main>
+<section class="hero">
+<div class="container hero-grid">
+<div>
+<div class="eyebrow">Stem cell support education without the hype circus</div>
+<h1>Stem Cell Support, Explained Simply.</h1>
+<p>
+            Learn how <strong>Release</strong>, <strong>Mobilize</strong>, and <strong>Signal</strong> work together,
+            understand why multi-step systems exist, and browse a clear educational path before you ever click a product link.
+          </p>
+<div class="hero-actions">
+<a class="btn-primary" href="#system">Learn the System</a>
+<a class="btn-secondary" href="#products">View Products</a>
+</div>
+<p class="hero-note">
+            Affiliate disclosure: This site contains affiliate links. If you click a product link and make a purchase,
+            StemCellZone may earn a commission at no extra cost to you. Content here is informational only and is not medical advice.
+          </p>
+</div>
+<div class="hero-card">
+<div class="hero-logo-wrap">
+<img alt="StemCellZone brand logo" class="hero-logo" src="images/stemcellzone-logo.png"/>
+</div>
+<div class="hero-mini-points">
+<div class="mini-point">3 core system products</div>
+<div class="mini-point">1 bundle recommendation path</div>
+<div class="mini-point">36-card article pyramid ready to expand</div>
+</div>
+</div>
+</div>
+</section>
+<section class="trust-strip">
+<div class="container trust-inner">
+<div class="trust-grid">
+<div class="trust-item">Research-backed concepts</div>
+<div class="trust-item">Educational content first</div>
+<div class="trust-item">No fake testimonials</div>
+</div>
+</div>
+</section>
+<section class="section" id="start">
+<div class="container">
+<div class="section-card">
+<h2>Start Here</h2>
+<p class="lead">
+            This site is built to teach in layers. Start broad, go deeper if you want, and avoid the usual supplement fog machine.
+          </p>
+<div class="start-grid">
+<article class="mini-card">
+<h3>What are stem cells?</h3>
+<p>Start with the basic definition, what they are, and why people talk about them so much.</p>
+</article>
+<article class="mini-card">
+<h3>How your body uses them</h3>
+<p>Learn the simple biology of repair, signaling, and response without drowning in jargon.</p>
+</article>
+<article class="mini-card">
+<h3>Why support matters</h3>
+<p>Understand why some people look at support systems instead of treating stem cells like a magic word.</p>
+</article>
+<article class="mini-card">
+<h3>Common misconceptions</h3>
+<p>Separate real-world expectations from internet hype and product-page smoke bombs.</p>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="system">
+<div class="container">
+<div class="section-card">
+<h2>The 3-Step Stem Cell Support System</h2>
+<p class="lead">
+            The hook here is simple: these are not random products. The structure is built around a sequence, not a supplement pile.
+          </p>
+<div class="system-grid">
+<article class="product-card">
+<div class="product-tag">Step 1</div>
+<h3>Release</h3>
+<p>Explain what it means to increase the number of available cells entering circulation and why this is the first part of the logic chain.</p>
+<ul class="feature-list">
+<li>Start with availability</li>
+<li>Creates the opening phase</li>
+<li>Gives the system somewhere to begin</li>
+</ul>
+<a class="card-link" href="#products">See Release Product</a>
+</article>
+<article class="product-card">
+<div class="product-tag">Step 2</div>
+<h3>Mobilize</h3>
+<p>Explain movement through the body, circulation logic, and why cells being available is not the same thing as them getting where they need to go.</p>
+<ul class="feature-list">
+<li>Movement through circulation</li>
+<li>Builds on release</li>
+<li>Adds the second layer of the system</li>
+</ul>
+<a class="card-link" href="#products">See Mobilize Product</a>
+</article>
+<article class="product-card">
+<div class="product-tag">Step 3</div>
+<h3>Signal</h3>
+<p>Explain direction, homing, and why the final step is about helping the overall system make better sense as a full sequence.</p>
+<ul class="feature-list">
+<li>Direction and targeting</li>
+<li>Completes the 3-part logic</li>
+<li>Ties the system together</li>
+</ul>
+<a class="card-link" href="#products">See Signal Product</a>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="products">
+<div class="container">
+<div class="section-card">
+<h2>3 products, one system</h2>
+<p class="lead">
+            This row follows the same clean conversion structure as the rest of the site, with the stem cell system logic in front.
+            Replace the placeholder links below with your live affiliate links when you are ready.
+          </p>
+<div class="product-grid">
+<article class="product-card">
+<div class="product-tag">Product 1</div>
+<h3>Release Product</h3>
+<div class="price-row">Affiliate Link Placeholder</div>
+<div class="rating-row">Use this slot for the product that anchors the Release phase</div>
+<p>
+                Short explanation of how this product fits the release step and why it belongs in the first position.
+              </p>
+<ul class="feature-list">
+<li>Release positioning</li>
+<li>Simple explanation block</li>
+<li>Ready for affiliate URL</li>
+</ul>
+<a class="card-link" href="#">View Product</a>
+</article>
+<article class="product-card">
+<div class="product-tag">Product 2</div>
+<h3>Mobilize Product</h3>
+<div class="price-row">Affiliate Link Placeholder</div>
+<div class="rating-row">Use this slot for the product that supports the Mobilize phase</div>
+<p>
+                Short explanation of movement, circulation logic, and why this is the middle step of the system.
+              </p>
+<ul class="feature-list">
+<li>Mobilize positioning</li>
+<li>Builds on product 1</li>
+<li>Ready for affiliate URL</li>
+</ul>
+<a class="card-link" href="#">View Product</a>
+</article>
+<article class="product-card">
+<div class="product-tag">Product 3</div>
+<h3>Signal Product</h3>
+<div class="price-row">Affiliate Link Placeholder</div>
+<div class="rating-row">Use this slot for the product that supports the Signal phase</div>
+<p>
+                Short explanation of direction, targeting, and why this final step rounds out the sequence.
+              </p>
+<ul class="feature-list">
+<li>Signal positioning</li>
+<li>Completes the system</li>
+<li>Ready for affiliate URL</li>
+</ul>
+<a class="card-link" href="#">View Product</a>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="container">
+<div class="section-card">
+<h2>Why these 3 work together</h2>
+<p class="lead">
+            The logic here is what makes the site stronger than a plain affiliate shelf. The point is not to show three random bottles and hope somebody clicks.
+          </p>
+<div class="guide-grid">
+<article class="mini-card">
+<h3>Not random</h3>
+<p>The system is framed as a sequence, not a pile of unrelated products trying to share the same page.</p>
+</article>
+<article class="mini-card">
+<h3>Sequence matters</h3>
+<p>Release, mobilize, and signal are easier to understand when they are taught in order.</p>
+</article>
+<article class="mini-card">
+<h3>System logic builds trust</h3>
+<p>People are more likely to buy when they understand why the full structure exists.</p>
+</article>
+<article class="mini-card">
+<h3>Better path to the bundle</h3>
+<p>This section makes the bottom recommendation feel earned instead of forced.</p>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="recommendation">
+<div class="container">
+<div class="section-card">
+<h2>What I recommend</h2>
+<p class="lead">
+            You can take these individually, but the full system is the stronger recommendation because the sequence makes more sense together than in fragments.
+          </p>
+<div class="product-card" style="max-width: 760px; margin: 0 auto;">
+<div class="product-tag">Best Option</div>
+<h3>Full Bundle</h3>
+<div class="price-row">Complete System Positioning</div>
+<div class="rating-row">This is the main conversion target for the site</div>
+<p>
+              Use this featured block for the full StemRegen bundle. This is where you position the complete system as the most coherent and most effective overall approach.
+            </p>
+<ul class="feature-list">
+<li>Strongest recommendation block</li>
+<li>Best fit for the complete-system message</li>
+<li>Replace with live bundle affiliate link later</li>
+</ul>
+<a class="card-link" href="#">Get the Full System</a>
+</div>
+</div>
+</div>
+</section>
+<section class="articles" id="articles">
+<div class="container">
+<h2>Articles and future expansion</h2>
+<p class="lead">
+          The article structure is already mapped into a 3-tier knowledge pyramid. Start with the broad topics below, then expand deeper over time.
+        </p>
+<div class="article-grid">
+<article class="article-card">
+<div class="article-kicker">Core Topic</div>
+<h3>What are stem cells?</h3>
+<p>Beginner explanation of what stem cells are and why they matter in the body.</p>
+<a class="article-link" href="articles.html">Open Articles Map</a>
+</article>
+<article class="article-card">
+<div class="article-kicker">Core Topic</div>
+<h3>How stem cells work</h3>
+<p>Simple biology of repair, signaling, and movement through the body.</p>
+<a class="article-link" href="articles.html">Open Articles Map</a>
+</article>
+<article class="article-card">
+<div class="article-kicker">Core Topic</div>
+<h3>Support systems overview</h3>
+<p>Explain what people mean by supporting stem cells and why multi-step systems exist.</p>
+<a class="article-link" href="articles.html">Open Articles Map</a>
+</article>
+</div>
+</div>
+</section>
+<section class="section" id="faq">
+<div class="container">
+<div class="section-card">
+<h2>FAQ</h2>
+<p class="lead">
+            Keep the tone honest and practical. This section helps build trust and gives you room to answer the obvious questions without hype.
+          </p>
+<div class="faq-grid">
+<article class="faq-item">
+<h3>Is this medical advice?</h3>
+<p>No. This site is educational only and should not be treated as medical advice, diagnosis, or treatment guidance.</p>
+</article>
+<article class="faq-item">
+<h3>Have you personally used this system?</h3>
+<p>No. The honest positioning here is that this site explains how the system works rather than pretending to offer fake testimonials.</p>
+</article>
+<article class="faq-item">
+<h3>Why recommend the bundle?</h3>
+<p>Because the site logic is built around the idea that sequence matters and the full system makes the most sense together.</p>
+</article>
+<article class="faq-item">
+<h3>Will results be guaranteed?</h3>
+<p>No. Clear expectations, no guarantees, and no miracle-language nonsense.</p>
+</article>
+</div>
+<ul class="notice-list">
+<li>Educational only</li>
+<li>Not medical advice</li>
+<li>No guarantees</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="final-cta">
+<div class="container">
+<div class="final-cta-card">
+<h2>Learn the system first, then decide what fits.</h2>
+<p>
+            StemCellZone is built to teach before it pushes. Start with the logic, understand the 3-part system, and use the article map when you want to go deeper.
+          </p>
+<div class="hero-actions" style="justify-content:center;">
+<a class="btn-secondary" href="articles.html">Browse Articles</a>
+<a class="btn-primary" href="#recommendation">See Best Option</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container footer-grid">
+<div class="footer-brand">
+<img alt="StemCellZone logo" src="images/stemcellzone-logo.png"/>
+<p>
+          StemCellZone is an educational affiliate website focused on explaining stem cell support systems clearly, simply, and honestly.
+        </p>
+</div>
+<div class="footer-links">
+<a href="articles.html">Articles</a>
+<a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+<a href="privacy-policy.html">Privacy Policy</a>
+<a href="terms.html">Terms</a>
+<a href="sitemap.html">Sitemap</a>
+</div>
+</div>
+</footer>
+</body>
+</html>
